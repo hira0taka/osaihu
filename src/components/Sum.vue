@@ -8,7 +8,7 @@
       <table>
         <tr>
           <th>支払合計</th>
-          <td></td>
+          <td>{{  }}</td>
         </tr>
         <tr>
           <th>{{}}の支払合計</th>

@@ -25,7 +25,7 @@ export default {
     posts: [
       {id:0, day:"2021/05/21", money:500, memo:"ランチ", sharing:"aki", share_money:500},
       {id:1, day:"2021/05/21", money:1200, memo:"ディナー", sharing:"aki", share_money:500},
-      {id:1, day:"2021/05/21", money:1200, memo:"ディナー", sharing:"aki", share_money:500},
+      {id:1, day:"2021/05/21", money:1200, memo:"ごはん", sharing:"aki", share_money:500},
     ]
   }
 }
