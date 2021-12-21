@@ -1,35 +1,31 @@
 <template>
   <div id="pay">
-    <table>
-      <tr>
-        <th>日付</th>
-        <td><flat-pickr v-model="date" class="form-control"></flat-pickr></td>
-      </tr>
-      <tr>
-        <th>支払額</th>
-        <td><input type="text" placeholder="0" class="form-control" />円</td>
-      </tr>
-      <tr>
-        <th>メモ</th>
-        <td>
-          <textarea
+    <div class="form-group">
+        <label>日付</label>
+        <flat-pickr v-model="date" class="form form-control"></flat-pickr>
+    </div>
+    <div class="form-group">
+        <label>支払額</label>
+        <input type="text" placeholder="0" class="form form-control" />
+    </div>
+    <div class="form-group">
+        <label>メモ</label>
+        <textarea
             name="memo"
             placeholder="未入力"
-            cols="30"
             rows="2"
-            class="form-control"
+            class="form form-control"
           />
-        </td>
-      </tr>
-      <tr>
-        <th>支払分担</th>
-        <td>You<input type="text" placeholder="0" class="form-control" />円</td>
-        <td>Me<input type="text" placeholder="0" class="form-control" />円</td>
-      </tr>
-    </table>
-    <div>
-      <button @click="entry">登録</button>
     </div>
+    <div class="form-group">
+        <label>支払分担</label>
+        <br>
+        <p class="role">You</p>
+        <input type="text" placeholder="0" class="form form-control" />
+        <p class="role">Me</p>
+        <input type="text" placeholder="0" class="form form-control" />
+    </div>
+    <button @click="entry">登録</button>
   </div>
 </template>
 
@@ -51,4 +47,8 @@ export default {
 </script>
 
 <style>
+.form {
+  text-align: right;
+  width: 300px;
+}
 </style>

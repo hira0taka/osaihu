@@ -47,7 +47,7 @@
 import axios from 'axios'
 import { onMounted, reactive } from 'vue'
 
-let url = "https://osaihu-3e519-default-rtdb.firebaseio.com/Pay"
+let url = "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json"
 
 export default {
   name: "History",
