@@ -1,6 +1,9 @@
 <template>
   <div id="pay">
-    <p>{{ data.number }}</p>
+    <div class="form-group">
+      <label>ID</label>
+      <input type="text" v-model="data.id" class="form form-control" />
+    </div>
     <div class="form-group">
       <label>日付</label>
       <flat-pickr v-model="data.date" class="form form-control"></flat-pickr>
@@ -53,7 +56,7 @@ import axios from "axios";
 import { reactive } from "vue";
 
 let url =
-  "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json";
+  "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay";
 
 export default {
   name: "Pay",
@@ -62,39 +65,46 @@ export default {
   },
   setup() {
     const data = reactive({
-      number: 0,
+      id: 0,
       date: "",
       money: 0,
       memo: "",
       shareYou: 0,
       sharePrt: 0,
-    });
+    })
 
     const entry = () => {
-      let countNum = number++;
       if (data.money == 0) {
-        console.log("no-money!");
-        return;
+        console.log("no-money!")
+        return
       }
-      let add_url = url + "/" + data.number + ".json";
+      let add_url = url + '/' + data.id + '.json'
       let item = {
-        date: data.date,
-        money: data.money,
-        memo: data.memo,
-        You: data.shareYou,
-        Partner: data.sharePrt,
-      };
-      const putPayData = async () => {
-        let putResult = await axios.put(add_url,item) {
-          data.number: 0
-      data.date = ""
-      data.money = 0
-      data.memo = ""
-      data.shareYou = 0
-      data.sharePrt = 0
-        }
-      };
-    };
+        'date': data.date,
+        'money': data.money,
+        'memo': data.memo,
+        'You': data.shareYou,
+        'Partner': data.sharePrt
+      }
+      axios.put(add_url, item).then(()=>{
+          data.id = 0
+          data.date = ""
+          data.money = 0
+          data.memo = ""
+          data.shareYou = 0
+          data.sharePrt = 0
+      }) 
+      // const putPayData = async () => {
+      //   let putResult = await axios.post(add_url, {
+      //     number: 0
+      //     data.date = ""
+      //     data.money = 0
+      //     data.memo = ""
+      //     data.shareYou = 0
+      //     data.sharePrt = 0
+      //   })
+      }
+      return { data, entry }
   },
 };
 </script>
