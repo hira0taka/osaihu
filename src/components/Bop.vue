@@ -1,6 +1,7 @@
 <template>
 <div id="bop">
 <Sum />
+
 <br>
 <History />
  <!-- v-for="post in posts" v-bind:key="post.id" v-bind:post="post" -->

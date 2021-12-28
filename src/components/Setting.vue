@@ -1,6 +1,7 @@
 <template>
 <div id="setting">
  <p>設定</p>
+ <p>set</p>
 </div>
 </template>
 
