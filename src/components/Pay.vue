@@ -86,7 +86,7 @@ export default {
         'You': data.shareYou,
         'Partner': data.sharePrt
       }
-      axios.put(add_url, item).then(()=>{
+      axios.post(add_url, item).then(()=>{
           data.id = 0
           data.date = ""
           data.money = 0
