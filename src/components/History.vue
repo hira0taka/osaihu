@@ -2,7 +2,7 @@
   <div id="history">
     <div>
       <ul>
-        <li v-for="pay in payData" >{{pay.name}}</li>
+       
       </ul>
     </div>
     <div class="hst-box" v-for="(item, key) in data.payData" :key="key">
