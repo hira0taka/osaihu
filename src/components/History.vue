@@ -1,9 +1,9 @@
 <template>
   <div id="history">
-    <div>
-      <ul>
-       
-      </ul>
+    <div v-for="(item,index)">
+      <div>
+
+      </div>
     </div>
     <div class="hst-box" v-for="(item, key) in data.payData" :key="key">
       <table>

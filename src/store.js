@@ -4,13 +4,13 @@ import axios from "axios"
 let url =
   "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json"
 
-  // axiosを利用してデータを取得
+// axiosを利用してデータを取得
 export const actions = {
-  async getPayData({ commit,state }) {
+  async fetchPay({ commit, state }) {
     try {
-      const Result = await axios.get(url)
+      const Result = await $axios.$get(url)
       commit('setData', Result)
-    }catch (error) {
+    } catch (error) {
       console.log(error)
     }
   }
@@ -18,27 +18,41 @@ export const actions = {
 
 // actionsをmutationsにデータをコミット
 export const state = () => ({
-  data: null
+  payData: [],
+  date: null,
+  money: null,
+  memo: null,
+  shareYou: null,
+  sharePrt: null
 })
 
 // mutationsをstateにデータをセット
 export const mutations = {
-  setData: (state, value) => {
-    state.Data = value
-  }
+  setId(state, {id}) {
+    state.id = id
+  },
+  setDate(state, {date}) {
+    state.date = date
+  },
+  setMoney(state, {money}) {
+    state.money = money
+  },
+  setMemo(state, {memo}) {
+    state.memo = memo
+  },
+  setShareYou(state, {shareYou}) {
+    state.shareYou = shareYou
+  },
+  setSharePrt(state, {sharePrt}) {
+    state.sharePrt = sharePrt
+  },
 }
 
-// export const store = createStore ({
-//     state() {
-//         return {
-//           payData:[
-//             id: 0,
-//             date: "",
-//             money: 0,
-//             memo: "",
-//             shareYou: 0,
-//             sharePrt: 0
-//           ]
-//         }
-//     }
-// })
+export const getters = {
+  id: (state) => state.id,
+  date: (state) => state.date,
+  money: (state) => state.money,
+  memo: (state) => state.memo,
+  shareYou: (state) => state.shareYou,
+  sharePrt: (state) => state.sharePrt
+}
