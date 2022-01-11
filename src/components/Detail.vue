@@ -12,7 +12,7 @@ let url =
   "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json";
 
 export default {
-  name: "History",
+  name: "Detail",
   setup() {
     const data = reactive({
       payData: "",

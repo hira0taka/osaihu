@@ -4,8 +4,9 @@ import axios from "axios"
 let url =
   "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json"
 
+export const store = createStore() {
 // axiosを利用してデータを取得
-export const actions = {
+actions: {
   async fetchPay({ commit, state }) {
     try {
       const Result = await $axios.$get(url)
@@ -14,16 +15,30 @@ export const actions = {
       console.log(error)
     }
   }
+},
+getters: {
+  payDatas:(state) {
+    return state.payDatas
+    // id: (state) => state.id,
+    // date: (state) => state.date,
+    // money: (state) => state.money,
+    // memo: (state) => state.memo,
+    // shareYou: (state) => state.shareYou,
+    // sharePrt: (state) => state.sharePrt
+  }
 }
+}
+
 
 // actionsをmutationsにデータをコミット
 export const state = () => ({
-  payData: [],
-  date: null,
-  money: null,
-  memo: null,
-  shareYou: null,
-  sharePrt: null
+  payDatas: [
+    {date: null,
+    money: null,
+    memo: null,
+    shareYou: null,
+    sharePrt: null}
+  ]
 })
 
 // mutationsをstateにデータをセット
@@ -46,13 +61,4 @@ export const mutations = {
   setSharePrt(state, {sharePrt}) {
     state.sharePrt = sharePrt
   },
-}
-
-export const getters = {
-  id: (state) => state.id,
-  date: (state) => state.date,
-  money: (state) => state.money,
-  memo: (state) => state.memo,
-  shareYou: (state) => state.shareYou,
-  sharePrt: (state) => state.sharePrt
 }

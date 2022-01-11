@@ -1,10 +1,8 @@
 <template>
   <div id="history">
-    <div v-for="(item,index)">
-      <div>
-
-      </div>
-    </div>
+    <ul>
+      <li v-for="payData in $store.getters.payDatas" :key="payData.id"></li>
+    </ul>
     <div class="hst-box" v-for="(item, key) in data.payData" :key="key">
       <table>
         <tr>
@@ -64,6 +62,6 @@ export default {
 
 <style>
 .hst-box {
-margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 </style>
