@@ -45,7 +45,7 @@
         class="form form-control"
       />
     </div>
-    <button @click="entry" class="btn btn-primary">登録</button>
+    <button @click="entry" class="btn btn-primary">記録する</button>
   </div>
 </template>
 

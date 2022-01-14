@@ -1,10 +1,22 @@
-import Vuex from 'vuex'
+import {createStore} from 'vuex'
 import axios from "axios"
 
 let url =
   "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json"
 
-export const store = createStore() {
+export const store = createStore({
+  state() {
+    return{
+      payDatas: [
+        {date: null,
+        money: null,
+        memo: null,
+        shareYou: null,
+        sharePrt: null}
+      ]
+    }
+  },
+  
 // axiosを利用してデータを取得
 actions: {
   async fetchPay({ commit, state }) {
@@ -26,39 +38,29 @@ getters: {
     // shareYou: (state) => state.shareYou,
     // sharePrt: (state) => state.sharePrt
   }
-}
-}
-
+},
 
 // actionsをmutationsにデータをコミット
-export const state = () => ({
-  payDatas: [
-    {date: null,
-    money: null,
-    memo: null,
-    shareYou: null,
-    sharePrt: null}
-  ]
-})
 
 // mutationsをstateにデータをセット
-export const mutations = {
-  setId(state, {id}) {
+mutations: {
+  setId:(state, {id})=> {
     state.id = id
   },
-  setDate(state, {date}) {
+  setDate:(state, {date})=> {
     state.date = date
   },
-  setMoney(state, {money}) {
+  setMoney:(state, {money})=> {
     state.money = money
   },
-  setMemo(state, {memo}) {
+  setMemo:(state, {memo})=> {
     state.memo = memo
   },
-  setShareYou(state, {shareYou}) {
+  setShareYou:(state, {shareYou})=> {
     state.shareYou = shareYou
   },
-  setSharePrt(state, {sharePrt}) {
+  setSharePrt:(state, {sharePrt})=> {
     state.sharePrt = sharePrt
   },
 }
+})
