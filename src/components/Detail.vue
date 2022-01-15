@@ -7,9 +7,8 @@
 <script>
 import axios from "axios";
 import { onMounted, reactive } from "vue";
-
-let url =
-  "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay.json";
+// 定数を保存するファイル(const.js)からurlを生成する関数を呼び出し
+import { makeFirebaseURL } from '../const'
 
 export default {
   name: "Detail",
@@ -19,7 +18,11 @@ export default {
     });
 
     const getPayData = async () => {
-      let payResult = await axios.get(url);
+      // Pay.jsonのURLを生成
+      const url = makeFirebaseURL('Pay')
+      // 確認
+      console.log(url)
+      const payResult = await axios.get(url);
       data.payData = payResult.data;
     };
 

@@ -54,9 +54,7 @@ import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import axios from "axios";
 import { reactive } from "vue";
-
-let url =
-  "https://osaihu-3e519-default-rtdb.asia-southeast1.firebasedatabase.app/Pay";
+import { makeFirebaseURL } from '../const'
 
 export default {
   name: "Pay",
@@ -78,7 +76,14 @@ export default {
         console.log("no-money!")
         return
       }
-      let add_url = url + '/' + data.id + '.json'
+
+      // let add_url = url + '/' + data.id + '.json'
+      // `文字${変数}`はテンプレートリテラル（stringの中に変数を組み込む）
+      const add_url = `Pay/${data.id}`
+      // Pay/id.jsonのurlを生成
+      const url = makeFirebaseURL(add_url)
+      // 確認
+      console.log(url)
       let item = {
         'date': data.date,
         'money': data.money,
