@@ -17,34 +17,6 @@ export const store = createStore({
       ]
     }
   },
-
-  // axiosを利用してデータを取得
-  actions: {
-    async fetchPay({ commit }) {
-      try {
-        // Pay.jsonのURLを生成
-        const url = makeFirebaseURL('Pay')
-        const Result = await axios.$get(url)
-        commit('setData', Result)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  },
-  getters: {
-    payDatas: (state) => {
-      return state.payDatas
-      // id: (state) => state.id,
-      // date: (state) => state.date,
-      // money: (state) => state.money,
-      // memo: (state) => state.memo,
-      // shareYou: (state) => state.shareYou,
-      // sharePrt: (state) => state.sharePrt
-    }
-  },
-
-  // actionsをmutationsにデータをコミット
-
   // mutationsをstateにデータをセット
   mutations: {
     setId: (state, { id }) => {
@@ -64,6 +36,34 @@ export const store = createStore({
     },
     setSharePrt: (state, { sharePrt }) => {
       state.sharePrt = sharePrt
-    },
-  }
+    }
+  },
+  // actionsをmutationsにデータをコミット
+  // axiosを利用してデータを取得
+  // fetchPayの引数にcommit
+  actions: {
+    async fetchPay({ commit }) {
+      try {
+        // Pay.jsonのURLを生成
+        const url = makeFirebaseURL('Pay')
+        const Result = await axios.$get(url)
+        // Resultはfirebaseからとってきたデータ
+        // commitでmutationのsetDataという関数に渡す
+        commit('setId', Result)
+        // commit('setId', Result)
+        // commit('setmoney', Result)
+        // commit('setMemo', Result)
+        // commit('setShareYou', Result)
+        // commit('setSharePrt', Result)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
+  getters: {
+    payDatas: (state) => {
+      return state.payDatas
+    }
+  },
+
 })

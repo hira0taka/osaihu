@@ -1,9 +1,11 @@
 <template>
   <div id="history">
+    <button @click="complete">清算</button>
+      <button @click="delate">削除</button>
     <ul>
-      <li v-for="payData in $store.getters.payDatas" :key="payData.id"></li>
+      <li v-for="payData in $store.getters.payDatas" :key="payData.id">{{payData.date}}hi</li>
     </ul>
-    <div class="hst-box" v-for="(item, key) in data.payData" :key="key">
+    <!-- <div class="hst-box" v-for="(item, key) in data.payData" :key="key">
       <table>
         <tr>
           <th>日付</th>
@@ -25,8 +27,8 @@
           <td>{{ item.sharePrt }}円</td>
         </tr>
       </table>
-      <button @click="complete">支払い完了</button>
-    </div>
+      
+    </div> -->
   </div>
 </template>
 
@@ -39,8 +41,19 @@ export default {
   name: "History",
   setup() {
     const data = reactive({
-      payData: "",
+      payData: [
+        {
+          date: null,
+          money: null,
+          memo: null,
+          shareYou: null,
+          sharePrt: null
+        }
+      ]
     });
+    // return {
+    //   data
+    // }
 
     const getPayData = async () => {
     // Pay.jsonのURLを生成
