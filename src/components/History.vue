@@ -41,19 +41,27 @@ export default {
   name: "History",
   setup() {
     const data = reactive({
-      payData: [
-        {
-          date: null,
-          money: null,
-          memo: null,
-          shareYou: null,
-          sharePrt: null
-        }
-      ]
-    });
+      $store.state.payDatas
+      // payData: [
+      //   {
+      //     date: null,
+      //     money: null,
+      //     memo: null,
+      //     shareYou: null,
+      //     sharePrt: null
+      //   }
+      // ]
+    }),
     // return {
     //   data
     // }
+    const getData = () => {
+      data.$store.dispatch('fetchPay')
+    },
+    return{
+      data,
+      setId
+    },
 
     const getPayData = async () => {
     // Pay.jsonのURLを生成

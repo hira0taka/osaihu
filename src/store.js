@@ -17,26 +17,39 @@ export const store = createStore({
       ]
     }
   },
+  getters: {
+    allDatas: (state) => {
+      return state.payDatas
+    }
+  },
   // mutationsをstateにデータをセット
   mutations: {
-    setId: (state, { id }) => {
-      state.id = id
-    },
-    setDate: (state, { date }) => {
-      state.date = date
-    },
-    setMoney: (state, { money }) => {
-      state.money = money
-    },
-    setMemo: (state, { memo }) => {
-      state.memo = memo
-    },
-    setShareYou: (state, { shareYou }) => {
-      state.shareYou = shareYou
-    },
-    setSharePrt: (state, { sharePrt }) => {
-      state.sharePrt = sharePrt
+    setData: (state, { id, date, money,memo, shareYou, sharePrt }) => {
+      state.id = id;
+      state.date = date;
+      state.money = money;
+      state.memo = memo;
+      state.shareYou = shareYou;
+      state.sharePrt = sharePrt;
     }
+    // setId: (state, { id }) => {
+    //   state.id = id
+    // },
+    // setDate: (state, { date }) => {
+    //   state.date = date
+    // },
+    // setMoney: (state, { money }) => {
+    //   state.money = money
+    // },
+    // setMemo: (state, { memo }) => {
+    //   state.memo = memo
+    // },
+    // setShareYou: (state, { shareYou }) => {
+    //   state.shareYou = shareYou
+    // },
+    // setSharePrt: (state, { sharePrt }) => {
+    //   state.sharePrt = sharePrt
+    // }
   },
   // actionsをmutationsにデータをコミット
   // axiosを利用してデータを取得
@@ -49,21 +62,10 @@ export const store = createStore({
         const Result = await axios.$get(url)
         // Resultはfirebaseからとってきたデータ
         // commitでmutationのsetDataという関数に渡す
-        commit('setId', Result)
-        // commit('setId', Result)
-        // commit('setmoney', Result)
-        // commit('setMemo', Result)
-        // commit('setShareYou', Result)
-        // commit('setSharePrt', Result)
+        commit('setData', Result)
       } catch (error) {
         console.log(error)
       }
     }
   },
-  getters: {
-    payDatas: (state) => {
-      return state.payDatas
-    }
-  },
-
 })
