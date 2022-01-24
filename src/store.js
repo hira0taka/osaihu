@@ -25,31 +25,13 @@ export const store = createStore({
   // mutationsをstateにデータをセット
   mutations: {
     setData: (state, { id, date, money,memo, shareYou, sharePrt }) => {
-      state.id = id;
-      state.date = date;
-      state.money = money;
-      state.memo = memo;
-      state.shareYou = shareYou;
-      state.sharePrt = sharePrt;
+      state.id = id,
+      state.date = date,
+      state.money = money,
+      state.memo = memo,
+      state.shareYou = shareYou,
+      state.sharePrt = sharePrt
     }
-    // setId: (state, { id }) => {
-    //   state.id = id
-    // },
-    // setDate: (state, { date }) => {
-    //   state.date = date
-    // },
-    // setMoney: (state, { money }) => {
-    //   state.money = money
-    // },
-    // setMemo: (state, { memo }) => {
-    //   state.memo = memo
-    // },
-    // setShareYou: (state, { shareYou }) => {
-    //   state.shareYou = shareYou
-    // },
-    // setSharePrt: (state, { sharePrt }) => {
-    //   state.sharePrt = sharePrt
-    // }
   },
   // actionsをmutationsにデータをコミット
   // axiosを利用してデータを取得
@@ -62,10 +44,17 @@ export const store = createStore({
         const Result = await axios.$get(url)
         // Resultはfirebaseからとってきたデータ
         // commitでmutationのsetDataという関数に渡す
-        commit('setData', Result)
+        commit('setData', Result.data)
       } catch (error) {
         console.log(error)
       }
     }
   },
 })
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+}

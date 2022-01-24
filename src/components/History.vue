@@ -2,33 +2,7 @@
   <div id="history">
     <button @click="complete">清算</button>
       <button @click="delate">削除</button>
-    <ul>
-      <li v-for="payData in $store.getters.payDatas" :key="payData.id">{{payData.date}}hi</li>
-    </ul>
-    <!-- <div class="hst-box" v-for="(item, key) in data.payData" :key="key">
-      <table>
-        <tr>
-          <th>日付</th>
-          <td>{{ item.date }}</td>
-        </tr>
-        <tr>
-          <th>支払額</th>
-          <td>{{ item.money }}円</td>
-        </tr>
-        <tr>
-          <th>メモ</th>
-          <td>{{ item.memo }}</td>
-        </tr>
-        <tr>
-          <th>支払分担</th>
-          <td>You</td>
-          <td>{{ item.shareYou }}円</td>
-          <td>Partner</td>
-          <td>{{ item.sharePrt }}円</td>
-        </tr>
-      </table>
-      
-    </div> -->
+      <div v-for="payData in allDatas" :key="payData.id">{{payData.date}}hi</div>
   </div>
 </template>
 
@@ -36,6 +10,7 @@
 import axios from "axios";
 import { onMounted, reactive } from "vue";
 import { makeFirebaseURL } from '../const'
+import { mapGetters,mapActions } from 'vuex'
 
 export default {
   name: "History",
@@ -62,7 +37,6 @@ export default {
       data,
       setId
     },
-
     const getPayData = async () => {
     // Pay.jsonのURLを生成
       const url = makeFirebaseURL('Pay')
@@ -78,10 +52,13 @@ export default {
     });
     return { data, getPayData };
   },
-  props: {
-    post: Object,
-  },
-};
+  methods: {
+  mapActions(['fetchPay']),
+},
+  computed:mapGetters(['allDatas']),
+  crested () {
+    this.feathPay()
+  }
 </script>
 
 <style>
