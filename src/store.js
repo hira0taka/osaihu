@@ -35,7 +35,6 @@ export const store = createStore({
   },
   // actionsをmutationsにデータをコミット
   // axiosを利用してデータを取得
-  // fetchPayの引数にcommit
   actions: {
     async fetchPay({ commit }) {
       try {
@@ -51,10 +50,3 @@ export const store = createStore({
     }
   },
 })
-
-export default {
-  state,
-  getters,
-  actions,
-  mutations
-}

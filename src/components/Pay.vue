@@ -30,14 +30,14 @@
     <div class="form-group">
       <label>支払分担</label>
       <br />
-      <p class="role">You</p>
+      <p class="role">じぶん</p>
       <input
         type="text"
         v-model="data.shareYou"
         placeholder="0"
         class="form form-control"
       />
-      <p class="role">Partner</p>
+      <p class="role">あいて</p>
       <input
         type="text"
         v-model="data.sharePrt"
