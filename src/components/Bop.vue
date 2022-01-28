@@ -1,11 +1,13 @@
 <template>
 <div id="bop">
+<div class="sum">
 <Sum />
-
+</div>
 <br>
-<History />
- <!-- v-for="post in posts" v-bind:key="post.id" v-bind:post="post" -->
+ <div class="rireki">
+ <History />
  <Detail />
+ </div>
 </div>
 </template>
 
@@ -25,5 +27,8 @@ export default {
 </script>
 
 <style>
-
+.rireki {
+  display:flex;
+  justify-content: space-around;
+}
 </style>

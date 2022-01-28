@@ -2,12 +2,12 @@ import { createStore } from 'vuex'
 import axios from "axios"
 import { makeFirebaseURL } from './const'
 
-
 export const store = createStore({
   state() {
     return {
       payDatas: [
         {
+          id: null,
           date: null,
           money: null,
           memo: null,
@@ -23,14 +23,10 @@ export const store = createStore({
     }
   },
   // mutationsをstateにデータをセット
+  // valueはactionsのresult.dataのこと。
   mutations: {
-    setData: (state, { id, date, money,memo, shareYou, sharePrt }) => {
-      state.id = id,
-      state.date = date,
-      state.money = money,
-      state.memo = memo,
-      state.shareYou = shareYou,
-      state.sharePrt = sharePrt
+    setData: (state, value) => {
+      state.payDatas = value
     }
   },
   // actionsをmutationsにデータをコミット
@@ -40,10 +36,11 @@ export const store = createStore({
       try {
         // Pay.jsonのURLを生成
         const url = makeFirebaseURL('Pay')
-        const Result = await axios.$get(url)
+        const result = await axios.get(url)
+        console.log(result.data)
         // Resultはfirebaseからとってきたデータ
         // commitでmutationのsetDataという関数に渡す
-        commit('setData', Result.data)
+        commit('setData', result.data)
       } catch (error) {
         console.log(error)
       }

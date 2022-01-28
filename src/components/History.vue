@@ -1,17 +1,18 @@
 <template>
   <div id="history">
-    <button @click="complete">清算</button>
+    <div class="hst-box" v-for="payData in data.payDatas" :key="payData.id">
+      <button @click="complete">清算</button>
       <button @click="delate">削除</button>
-      <div v-for="payData in allDatas" :key="payData.id">{{payData.date}}hi</div>
+      <!-- divではなくコンポーネントにすると後々のデータ管理が楽 -->
+      <p >{{payData.date}} </p>
+      <p>{{payData.money}}円</p>
+      </div>
   </div>
 </template>
 
 <script>
-// import axios from "axios";
 import { useStore } from 'vuex';
 import { reactive } from "vue";
-// import { makeFirebaseURL } from '../const'
-// import { mapGetters,mapActions } from 'vuex'
 
 export default {
   name: "History",
@@ -20,23 +21,31 @@ export default {
     const store = useStore();
 
     const data = reactive({
-      payData:{}
+      payDatas:{}
     });
 
 // PayDatasにcomputedを組み込む。更新した内容が反映されるようにする。
-    const payDatas = store.state.payDatas;
-    console.log(payDatas)
+    // const payDatas = store.state.payDatas;
+    
+
+    const getData = async () => {
+      await store.dispatch("fetchPay")
+      data.payDatas = store.getters.allDatas
+      console.log(data.payDatas)
+    }
+    getData()
 
   return {
     data,
-    payDatas
+    getData
   }
-  },
+  }
 }
 </script>
 
 <style>
 .hst-box {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

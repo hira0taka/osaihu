@@ -1,9 +1,9 @@
 <template>
   <div id="pay">
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>ID</label>
       <input type="text" v-model="data.id" class="form form-control" />
-    </div>
+    </div> -->
     <div class="form-group">
       <label>日付</label>
       <flat-pickr v-model="data.date" class="form form-control"></flat-pickr>
@@ -118,5 +118,8 @@ export default {
 .form {
   text-align: right;
   width: 300px;
+}
+.form-group {
+  display: flex;
 }
 </style>

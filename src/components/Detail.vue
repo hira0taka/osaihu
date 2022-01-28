@@ -1,44 +1,63 @@
 <template>
   <div id="detail">
-   <p>detail</p>
+   <div class="dtl-box" v-for="payData in data.payDatas" :key="payData.id">
+      <!-- divではなくコンポーネントにすると後々のデータ管理が楽 -->
+      <div class="res-group">
+      <label>日付</label>
+      <p>{{payData.date}} </p>
+      </div>
+      <div class="res-group">
+      <label>支払額</label>
+      <p>{{payData.money}}円</p>
+      </div>
+      <div class="res-group">
+      <label>メモ</label>
+      <p>{{payData.memo}}</p>
+      </div>
+      <div class="roleBox">
+      <label>支払分担</label>
+      <div class="res-group">
+      <label>じぶん</label>
+      <p>{{payData.shareYou}}円</p>
+      </div>
+      <div class="res-group">
+      <label>あなた</label>
+      <p>{{payData.sharePrt}}円</p>
+      </div>
+      </div>
+      </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { onMounted, reactive } from "vue";
-// 定数を保存するファイル(const.js)からurlを生成する関数を呼び出し
-import { makeFirebaseURL } from '../const'
+import { useStore } from 'vuex';
+import { reactive } from "vue";
 
 export default {
   name: "Detail",
   setup() {
+    const store = useStore();
     const data = reactive({
       payData: "",
     });
 
-    const getPayData = async () => {
-      // Pay.jsonのURLを生成
-      const url = makeFirebaseURL('Pay')
-      // 確認
-      console.log(url)
-      const payResult = await axios.get(url);
-      data.payData = payResult.data;
-    };
+const getData = async () => {
+      await store.dispatch("fetchPay")
+      data.payDatas = store.getters.allDatas
+      console.log(data.payDatas)
+    }
+    getData()
 
-    onMounted(() => {
-      getPayData();
-    });
-    return { data, getPayData };
-  },
-  props: {
-    post: Object,
-  },
+  return {
+    data,
+    getData
+  }
+   },
 };
 </script>
 
 <style>
-.hst-box {
-margin-bottom: 20px;
+.dtl-box {
+  display: flex;
 }
 </style>
