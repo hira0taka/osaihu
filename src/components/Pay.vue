@@ -6,7 +6,7 @@
     </div> -->
     <div class="form-group">
       <label>日付</label>
-      <flat-pickr v-model="data.date" class="form form-control"></flat-pickr>
+      <flat-pickr v-model="data.date" class="form form-control" name="date" :config="flatOption"></flat-pickr>
     </div>
     <div class="form-group">
       <label>支払額</label>
@@ -15,7 +15,7 @@
         v-model="data.money"
         placeholder="0"
         class="form form-control"
-      />
+      >円
     </div>
     <div class="form-group">
       <label>メモ</label>
@@ -29,28 +29,29 @@
     </div>
     <div class="form-group">
       <label>支払分担</label>
-      <br />
+      <br>
       <p class="role">じぶん</p>
       <input
         type="text"
         v-model="data.shareYou"
         placeholder="0"
         class="form form-control"
-      />
+      >円
       <p class="role">あいて</p>
       <input
         type="text"
         v-model="data.sharePrt"
         placeholder="0"
         class="form form-control"
-      />
+      />円
     </div>
-    <button @click="entry" class="btn btn-primary">記録する</button>
+    <button @click="record" class="btn btn-primary">記録する</button>
   </div>
 </template>
 
 <script>
 import flatPickr from "vue-flatpickr-component";
+import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 import "flatpickr/dist/flatpickr.css";
 import axios from "axios";
 import { reactive } from "vue";
@@ -63,18 +64,26 @@ export default {
   },
   setup() {
     const data = reactive({
-      id: 0,
-      date: "",
-      money: 0,
-      memo: "",
-      shareYou: 0,
-      sharePrt: 0,
+      data: [
+        {
+          id: null,
+          date: null,
+          money: null,
+          memo: null,
+          shareYou: null,
+          sharePrt: null
+        }
+      ],
+      flatOption:{
+        locate: Japanese,
+        enableTime: true,
+        dateFormat: "Y-m-d H:i"
+      }
     })
 
-    const entry = () => {
+    const record = () => {
       if (data.money == 0) {
         console.log("no-money!")
-        return
       }
 
       // let add_url = url + '/' + data.id + '.json'
@@ -109,7 +118,10 @@ export default {
       //     data.sharePrt = 0
       //   })
       }
-      return { data, entry }
+      return {
+        data,
+        record
+        }
   },
 };
 </script>

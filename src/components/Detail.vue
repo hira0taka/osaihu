@@ -57,7 +57,7 @@ const getData = async () => {
 </script>
 
 <style>
-.dtl-box {
+.res-group {
   display: flex;
 }
 </style>
