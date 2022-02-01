@@ -21,7 +21,7 @@
       <p>{{payData.shareYou}}円</p>
       </div>
       <div class="res-group">
-      <label>あなた</label>
+      <label>あいて</label>
       <p>{{payData.sharePrt}}円</p>
       </div>
       </div>
@@ -44,7 +44,6 @@ export default {
 const getData = async () => {
       await store.dispatch("fetchPay")
       data.payDatas = store.getters.allDatas
-      console.log(data.payDatas)
     }
     getData()
 

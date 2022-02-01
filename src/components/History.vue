@@ -18,11 +18,11 @@ export default {
   name: "History",
   setup() {
     // compositionAPIで書くときはthisが使えないので、useStoreをインポートして使う
-    const store = useStore();
+    const store = useStore()
 
     const data = reactive({
       payDatas:{}
-    });
+    })
 
 // PayDatasにcomputedを組み込む。更新した内容が反映されるようにする。
     // const payDatas = store.state.payDatas;

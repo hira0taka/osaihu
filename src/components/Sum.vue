@@ -11,11 +11,11 @@
           <td>{{  }}</td>
         </tr>
         <tr>
-          <th>{{}}の支払合計</th>
+          <th>じぶんの支払合計</th>
           <td></td>
         </tr>
         <tr>
-          <th>{{}}の支払合計</th>
+          <th>あいての支払合計</th>
           <td></td>
         </tr>
       </table>
@@ -24,8 +24,29 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { reactive } from "vue";
+
 export default {
   name: "Sum",
+  setup() {
+    const store = useStore();
+
+    const data = reactive({
+      payDatas:{}
+    })
+
+    const getData = async () => {
+      await store.dispatch("fetchPay")
+      data.payDatas = store.getters.allDatas
+    }
+    getData()
+
+  return {
+    data,
+    getData
+  }
+  }
 };
 </script>
 

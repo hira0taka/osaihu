@@ -7,7 +7,6 @@ export const store = createStore({
     return {
       payDatas: [
         {
-          id: null,
           date: null,
           money: null,
           memo: null,

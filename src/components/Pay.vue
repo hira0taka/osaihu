@@ -1,12 +1,8 @@
 <template>
   <div id="pay">
-    <!-- <div class="form-group">
-      <label>ID</label>
-      <input type="text" v-model="data.id" class="form form-control" />
-    </div> -->
     <div class="form-group">
       <label>日付</label>
-      <flat-pickr v-model="data.date" class="form form-control" name="date" :config="flatOption"></flat-pickr>
+      <flat-pickr v-model="data.date" class="form form-control" name="date"></flat-pickr>
     </div>
     <div class="form-group">
       <label>支払額</label>
@@ -51,7 +47,6 @@
 
 <script>
 import flatPickr from "vue-flatpickr-component";
-import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 import "flatpickr/dist/flatpickr.css";
 import axios from "axios";
 import { reactive } from "vue";
@@ -64,59 +59,42 @@ export default {
   },
   setup() {
     const data = reactive({
-      data: [
-        {
-          id: null,
+      data: {
           date: null,
           money: null,
           memo: null,
           shareYou: null,
           sharePrt: null
         }
-      ],
-      flatOption:{
-        locate: Japanese,
-        enableTime: true,
-        dateFormat: "Y-m-d H:i"
-      }
     })
 
     const record = () => {
       if (data.money == 0) {
         console.log("no-money!")
+        return
       }
-
-      // let add_url = url + '/' + data.id + '.json'
       // `文字${変数}`はテンプレートリテラル（stringの中に変数を組み込む）
-      const add_url = `Pay/${data.id}`
+      // const add_url = `Pay/${data.id}`
+      const add_url = `Pay`
       // Pay/id.jsonのurlを生成
       const url = makeFirebaseURL(add_url)
       // 確認
       console.log(url)
+      // firebaseに保存されるデータ＝item
       let item = {
         'date': data.date,
         'money': data.money,
         'memo': data.memo,
-        'You': data.shareYou,
-        'Partner': data.sharePrt
+        'shareYou': data.shareYou,
+        'sharePartner': data.sharePrt
       }
-      axios.post(add_url, item).then(()=>{
-          data.id = 0
+      axios.post(url, item).then(()=>{
           data.date = ""
           data.money = 0
           data.memo = ""
           data.shareYou = 0
           data.sharePrt = 0
       }) 
-      // const putPayData = async () => {
-      //   let putResult = await axios.post(add_url, {
-      //     number: 0
-      //     data.date = ""
-      //     data.money = 0
-      //     data.memo = ""
-      //     data.shareYou = 0
-      //     data.sharePrt = 0
-      //   })
       }
       return {
         data,
