@@ -8,8 +8,9 @@
       <label>支払額</label>
       <input
         type="text"
-        v-model="data.money"
+        v-model.number="data.money"
         placeholder="0"
+        
         class="form form-control"
       >円
     </div>
@@ -29,14 +30,14 @@
       <p class="role">じぶん</p>
       <input
         type="text"
-        v-model="data.shareYou"
+        v-model.number="data.shareYou"
         placeholder="0"
         class="form form-control"
       >円
       <p class="role">あいて</p>
       <input
         type="text"
-        v-model="data.sharePrt"
+        v-model.number="data.sharePrt"
         placeholder="0"
         class="form form-control"
       />円

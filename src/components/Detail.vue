@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
-import { reactive } from "vue";
+import { useStore } from 'vuex'
+import { reactive } from 'vue'
 
 export default {
   name: "Detail",
