@@ -47,7 +47,7 @@ export default {
     const sum = computed(() => {
       for(let i=0; i<data.store.state.payDatas.length; i++){
         for(let id in payDatas[i]){
-          calcMoney = data.store.state.payDatas.money
+          calcMoney += data.store.state.payDatas.money
           console.log(calcMoney)
         }
       }
