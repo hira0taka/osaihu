@@ -1,10 +1,10 @@
 <template>
   <div id="sum">
     <div class="sum-result">
-<h2>{{ calcTotal }}円</h2>
-<p>コメント</p>
+      <h2>{{ calcTotal }}円</h2>
+      <p>コメント</p>
     </div>
-    <div class="sum-box">
+    <div class="sum-detail">
       <table>
         <tr>
           <th>支払合計</th>
@@ -24,42 +24,44 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
-import { reactive,computed } from 'vue'
+import { useStore } from "vuex";
+import { reactive, computed } from "vue";
 
 export default {
   name: "Sum",
   setup() {
-    const store = useStore()
+    const store = useStore();
 
     const data = reactive({
-      payDatas:{}
-    })
+      payDatas: {},
+    });
 
     const getData = async () => {
-      await store.dispatch("fetchPay")
-      data.payDatas = store.getters.allDatas
-    }
-    getData()
+      await store.dispatch("fetchPay");
+      data.payDatas = store.getters.allDatas;
+    };
+    getData();
+    console.log(store.state.payDatas)
 
-// 合計値を算出
-// 配列の中の連想配列をfor文で取り出し、追加していく
-    const sum = computed(() => {
-      for(let i=0; i<data.store.state.payDatas.length; i++){
-        for(let id in payDatas[i]){
-          calcMoney += data.store.state.payDatas.money
-          console.log(calcMoney)
+    // 合計値を算出
+    // 配列の中の連想配列をfor文で取り出し、追加していく
+    const calc = computed(() => {
+      const calcMoney = store.state.payDatas.money;
+      for (let i = 0; i < Object.keys(payDatas).length; i++) {
+        for (let key in payDatas[i]) {
+          calcMoney += store.state.payDatas.money;
+          console.log(calcMoney);
         }
       }
-data.store.state.money
-    })
+      data.store.state.money;
+    });
 
-  return {
-    data,
-    getData,
-    sum
-  }
-  }
+    return {
+      data,
+      getData,
+      calc,
+    };
+  },
 };
 </script>
 
