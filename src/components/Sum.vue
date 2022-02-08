@@ -33,7 +33,7 @@ export default {
     const store = useStore();
 
     const data = reactive({
-      payDatas: {},
+      payDatas: [],
     });
 
     const getData = async () => {
@@ -47,13 +47,12 @@ export default {
     // 配列の中の連想配列をfor文で取り出し、追加していく
     const calc = computed(() => {
       const calcMoney = store.state.payDatas.money;
-      for (let i = 0; i < Object.keys(payDatas).length; i++) {
-        for (let key in payDatas[i]) {
-          calcMoney += store.state.payDatas.money;
-          console.log(calcMoney);
-        }
+      // for (let i = 0; i < Object.keys(payDatas).length; i++) {
+        for(list in payDatas) {
+          calcMoney += payDatas[list].money;
+          // console.log(calcMoney);
+          // console.log(payDatas[list]);
       }
-      data.store.state.money;
     });
 
     return {
